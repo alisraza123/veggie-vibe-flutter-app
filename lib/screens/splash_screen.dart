@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../app_theme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -49,11 +50,11 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     if (!_isImageLoaded) {
-      return const Scaffold(backgroundColor: Color(0xFF16A34A));
+      return const Scaffold(backgroundColor: AppTheme.primary);
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF16A34A),
+      backgroundColor: AppTheme.primary,
       body: LayoutBuilder(
         builder: (context, constraints) {
           final double h = constraints.maxHeight;

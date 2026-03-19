@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  final _nameController = TextEditingController();
+class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
-  final _passController = TextEditingController();
-  final _confirmPassController = TextEditingController();
-
-  bool _emailValid = false;
-  bool _passMatch = false;
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +19,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final bool isLandscape = size.height < 500;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F4F1),
+      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
+          
           Positioned.fill(
             child: Image.asset(
               'assets/images/login_bg.png',
@@ -37,6 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Container(color: Colors.black.withOpacity(0.5)),
           ),
 
+          
           SafeArea(
             child: LayoutBuilder(
               builder: (context, constraints) {
@@ -44,6 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   physics: const ClampingScrollPhysics(),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
+                      
                       minHeight: constraints.maxHeight,
                     ),
                     child: Padding(
@@ -54,70 +52,81 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           children: [
                             
                             Spacer(flex: isLandscape ? 1 : 2),
+
                             
-                            Column(
-                              children: [
-                                Text(
-                                  "Join the",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: isLandscape ? 22 : 32,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  "VeggieVibe",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: isLandscape ? 22 : 32,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFF1E773F),
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              "VeggieVibe",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.poppins(
+                                fontSize: isLandscape ? 28 : 42,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
-                            SizedBox(height: 10),
+                            Text(
+                              "Welcome back!",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.poppins(
+                                fontSize: isLandscape ? 14 : 18,
+                                color: const Color(0xFFd9ead3),
+                              ),
+                            ),
+
                             
                             Spacer(flex: isLandscape ? 1 : 2),
-          
+
                             
-                            _buildTextField(_nameController, "Full Name", Icons.person_outline, null, isLandscape),
-                            SizedBox(height: isLandscape ? 8 : 12),
-                            _buildTextField(_emailController, "Email", Icons.email_outlined, _emailValid, isLandscape),
-                            SizedBox(height: isLandscape ? 8 : 12),
-                            _buildTextField(_passController, "Password", Icons.lock_outline, null, isLandscape, obscure: true),
-                            SizedBox(height: isLandscape ? 8 : 12),
-                            _buildTextField(_confirmPassController, "Confirm Password", Icons.lock_reset_outlined, _passMatch, isLandscape, obscure: true),
-          
-                            const Spacer(),
-                            SizedBox(height: 10),
-          
+                            _buildTextField(_emailController, 'Email', Icons.email_outlined, isLandscape),
+                            SizedBox(height: isLandscape ? 8 : 16),
+                            _buildTextField(_passwordController, 'Password', Icons.lock_outline, isLandscape, obscure: true),
+
                             
-                            _buildCreateAccountButton(isLandscape),
-          
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: TextButton(
+                                onPressed: () {},
+                                style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                                child: Text(
+                                  "Forgot password?",
+                                  style: TextStyle(
+                                    color: const Color.fromARGB(255, 208, 255, 0),
+                                    fontSize: isLandscape ? 11 : 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            
                             const Spacer(),
-                            SizedBox(height: 5),
-          
+
+                            
+                            _buildLoginButton(isLandscape),
+
+                            
+                            // const Spacer(),
+                            SizedBox(height: 15,),
                             
                             Row(
                               children: [
-                                const Expanded(child: Divider(thickness: 1)),
+                                const Expanded(child: Divider(color: Colors.white38)),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 10),
                                   child: Text(
                                     "Or continue with",
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.grey[600], 
-                                      fontSize: isLandscape ? 11 : 13,
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: isLandscape ? 10 : 13,
                                     ),
                                   ),
                                 ),
-                                const Expanded(child: Divider(thickness: 1)),
+                                const Expanded(child: Divider(color: Colors.white38)),
                               ],
                             ),
-          
-                            const Spacer(),
-                            SizedBox(height: 5),
-          
+
+                            
+                                                       SizedBox(height: 15,),
+
                             
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -129,38 +138,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 _socialTile('assets/images/facebook.png', isLandscape),
                               ],
                             ),
-                            SizedBox(height: 5),
-                            const Spacer(flex: 2),
-          
+
+                            
+                            const Spacer(),
+                           
+
                             
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Already have an account? ",
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white, 
+                                  "Don't have an account? ",
+                                  style: TextStyle(
+                                    color: Colors.white,
                                     fontSize: isLandscape ? 12 : 14,
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: () => {
-                                    Navigator.pushNamed(context, '/login')
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/home');
                                   },
-                                  child: Text(
-                                    "Login",
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.white, 
-                                      fontWeight: FontWeight.bold, 
-                                      fontSize: isLandscape ? 12 : 14,
-                                       decoration: TextDecoration.underline,
+                                  child: const Text(
+                                    "Register",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 255, 255, 255), 
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline,
                                       decorationColor: Colors.white
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 15),
+                            
+                            const SizedBox(height: 10),
                           ],
                         ),
                       ),
@@ -177,34 +188,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   
 
-  Widget _buildTextField(TextEditingController controller, String label, IconData prefixIcon, bool? isValid, bool isLandscape, {bool obscure = false}) {
+  Widget _buildTextField(TextEditingController controller, String label, IconData icon, bool isLandscape, {bool obscure = false}) {
     return Container(
       constraints: BoxConstraints(maxHeight: isLandscape ? 45 : 55),
       child: TextField(
         controller: controller,
         obscureText: obscure,
         style: const TextStyle(color: Colors.black87, fontSize: 13),
-        onChanged: (v) {
-          setState(() {
-            if (label == "Email") _emailValid = v.contains('@');
-            if (label == "Confirm Password") _passMatch = v == _passController.text;
-          });
-        },
         decoration: InputDecoration(
-          prefixIcon: Icon(prefixIcon, color: const Color(0xFF134f5c), size: isLandscape ? 18 : 22),
+          prefixIcon: Icon(icon, color: const Color(0xFF134f5c), size: isLandscape ? 18 : 22),
           labelText: label,
           labelStyle: const TextStyle(color: Colors.black54, fontSize: 12),
           filled: true,
-          fillColor: Colors.white,
-          suffixIcon: isValid == null
-              ? null
-              : Icon(
-                  isValid ? Icons.check_circle : Icons.cancel, 
-                  color: isValid ? Colors.green : Colors.red,
-                  size: isLandscape ? 18 : 22,
-                ),
+          fillColor: Colors.white.withOpacity(0.9),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10), 
+            borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide.none,
           ),
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
@@ -213,10 +211,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildCreateAccountButton(bool isLandscape) {
+  Widget _buildLoginButton(bool isLandscape) {
     return Container(
-      width: double.infinity,
-      height: isLandscape ? 48 : 56,
+      height: isLandscape ? 50 : 56, 
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         gradient: const LinearGradient(
@@ -231,11 +228,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         child: Text(
-          "Create Account",
-          style: GoogleFonts.poppins(
-            color: Colors.white, 
-            fontWeight: FontWeight.bold, 
-            fontSize: isLandscape ? 14 : 16,
+          'Login',
+          style: TextStyle(
+            fontSize: isLandscape ? 14 : 17,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -251,7 +248,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 4)],
       ),
       child: Image.asset(path, fit: BoxFit.contain),
     );

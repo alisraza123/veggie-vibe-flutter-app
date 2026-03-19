@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:veggie_vibe/screens/login_screen.dart';
 import 'package:veggie_vibe/screens/onboarding_screen.dart';
 import 'package:veggie_vibe/screens/register_screen.dart';
 import './screens/splash_screen.dart';
@@ -23,7 +24,9 @@ class VeggieVibe extends StatelessWidget {
           home: const SplashScreen(),
           routes: {
             '/onboarding': (context) => OnboardingScreen(),
-            '/register':(context) => RegisterScreen()
+            '/register':(context) => RegisterScreen(),
+            '/login':(context) => LoginScreen()
+
             },
         );
       },

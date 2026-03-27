@@ -4,6 +4,8 @@ import 'package:veggie_vibe/screens/login_screen.dart';
 import 'package:veggie_vibe/screens/onboarding_screen.dart';
 import 'package:veggie_vibe/screens/register_screen.dart';
 import './screens/splash_screen.dart';
+import './screens/home_screen.dart';
+
 
 void main() {
   runApp(const VeggieVibe());
@@ -25,7 +27,8 @@ class VeggieVibe extends StatelessWidget {
           routes: {
             '/onboarding': (context) => OnboardingScreen(),
             '/register':(context) => RegisterScreen(),
-            '/login':(context) => LoginScreen()
+            '/login':(context) => LoginScreen(),
+            '/home':(context)=>HomeScreen(),
 
             },
         );
